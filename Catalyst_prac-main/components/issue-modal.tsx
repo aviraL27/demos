@@ -67,6 +67,27 @@ export default function IssueModal({ isOpen, onClose, preselectedCategory }: Iss
 
   if (!isOpen) return null
 
+  // Shared styles for inputs/selects
+  const controlStyle: React.CSSProperties = {
+    padding: "12px",
+    borderRadius: "10px",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    background: "rgba(255, 255, 255, 0.04)",
+    color: "white",
+    position: "relative",
+    zIndex: 1002,
+    // reduce platform default light dropdown bleed-through
+    WebkitAppearance: "menulist-button",
+    MozAppearance: "menulist",
+    appearance: "menulist",
+  }
+
+  // Explicit option style so dropdown options are dark with white text on most platforms
+  const optionStyle: React.CSSProperties = {
+    background: "rgba(20, 20, 20, 0.95)",
+    color: "white",
+  }
+
   return (
     <div
       style={{
@@ -111,13 +132,7 @@ export default function IssueModal({ isOpen, onClose, preselectedCategory }: Iss
             required
             value={formData.btId}
             onChange={handleChange}
-            style={{
-              padding: "12px",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.08)",
-              background: "rgba(255, 255, 255, 0.04)",
-              color: "white",
-            }}
+            style={controlStyle}
           />
 
           <input
@@ -127,13 +142,7 @@ export default function IssueModal({ isOpen, onClose, preselectedCategory }: Iss
             required
             value={formData.name}
             onChange={handleChange}
-            style={{
-              padding: "12px",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.08)",
-              background: "rgba(255, 255, 255, 0.04)",
-              color: "white",
-            }}
+            style={controlStyle}
           />
 
           <input
@@ -143,13 +152,7 @@ export default function IssueModal({ isOpen, onClose, preselectedCategory }: Iss
             required
             value={formData.email}
             onChange={handleChange}
-            style={{
-              padding: "12px",
-              borderRadius: "10px",
-              border: "1px solid rgba(255, 255, 255, 0.08)",
-              background: "rgba(255, 255, 255, 0.04)",
-              color: "white",
-            }}
+            style={controlStyle}
           />
 
           <select
@@ -157,24 +160,15 @@ export default function IssueModal({ isOpen, onClose, preselectedCategory }: Iss
             required
             value={formData.category}
             onChange={handleChange}
-            style={
-              {
-                padding: "12px",
-                borderRadius: "10px",
-                border: "1px solid rgba(255, 255, 255, 0.08)",
-                background: "rgba(255, 255, 255, 0.04)",
-                color: "white",
-                position: "relative",
-                zIndex: 1002,
-                colorScheme: "dark",
-              } as React.CSSProperties
-            }
+            style={controlStyle}
           >
-            <option value="">Category</option>
-            <option>Academics</option>
-            <option>Hostel</option>
-            <option>Support</option>
-            <option>Other</option>
+            <option value="" style={optionStyle}>
+              Category
+            </option>
+            <option style={optionStyle}>Academics</option>
+            <option style={optionStyle}>Hostel</option>
+            <option style={optionStyle}>Support</option>
+            <option style={optionStyle}>Other</option>
           </select>
 
           <select
@@ -182,23 +176,14 @@ export default function IssueModal({ isOpen, onClose, preselectedCategory }: Iss
             required
             value={formData.urgency}
             onChange={handleChange}
-            style={
-              {
-                padding: "12px",
-                borderRadius: "10px",
-                border: "1px solid rgba(255, 255, 255, 0.08)",
-                background: "rgba(255, 255, 255, 0.04)",
-                color: "white",
-                position: "relative",
-                zIndex: 1002,
-                colorScheme: "dark",
-              } as React.CSSProperties
-            }
+            style={controlStyle}
           >
-            <option value="">Urgency</option>
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
+            <option value="" style={optionStyle}>
+              Urgency
+            </option>
+            <option style={optionStyle}>Low</option>
+            <option style={optionStyle}>Medium</option>
+            <option style={optionStyle}>High</option>
           </select>
 
           <textarea
@@ -218,12 +203,7 @@ export default function IssueModal({ isOpen, onClose, preselectedCategory }: Iss
           />
 
           <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", marginTop: "6px" }}>
-            <button
-              type="button"
-              onClick={onClose}
-              className="btn"
-              style={{ background: "rgba(255, 255, 255, 0.05)", color: "white" }}
-            >
+            <button type="button" onClick={onClose} className="btn" style={{ background: "rgba(255, 255, 255, 0.05)", color: "white" }}>
               Cancel
             </button>
             <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
